@@ -4,57 +4,47 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
-  />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
     <title>ToDos</title>
   </head>
   <body>
     <header>
-        <nav><a href="index.html"></a>
-        <a href="todo.html"></a></nav>
+      <nav><a href="index.html"></a> <a href="todo.html"></a></nav>
     </header>
     <main>
-        <h1>ToDos</h1>
-   <input type="text"
-          id="input-todo"
-          name="input-todo-id"
-          placeholder="Enter ID"/>
-          <button onclick="handleClick();">Get</button>
-          <div id="todo-details">
+      <h1>ToDos</h1>
+      <input type="text" id="input-todo" name="input-todo-id" placeholder="Enter ID" />
+      <button onclick="handleClick();">Get</button>
+      <div id="todo-details"></div>
+    </main>
+    <footer></footer>
+    <script>
+      const inputTodo = document.querySelector("#input-todo");
+      const button = document.querySelector("button");
+      const divDisplay = document.querySelector("#todo-details");
+      // - when button clicked
+      // - get the todo id out of the textbox on the screen
+      function handleClick() {
+        let iD = inputTodo.value;
+        // - use the id to call the api to get a todo back
+        fetch(`http://jsonplaceholder.typicode.com/todos/${iD}`)
+          .then((response) => response.json())
+          .then((body) => {
+            // - verify I got the data back
+            console.log(body);
+            // - display one piece of data
+            let todo = body;
+            console.log(divDisplay);
+          });
+      }
 
-          </div>
-        </main>
-        <footer></footer>
-        <script>
-            const inputTodo = document.querySelector("#input-todo")
-            const button = document.querySelector("button")
-            
-            function handleClick(){
-                console.log("clicked");
-            }
+      // - display one piece of data
 
-       // - when button clicked
-    
-       // - get the todo id out of the textbox on the screen
-     
-       // - verify that I am getting different ids that I enter them and the button
-     
-       // - use the id to call the api to get a todo back
-      
-       // - verify I got the data back
-     
-       // - display one piece of data
-     
-       // - verify it works
-      
-       // - display another pieces of data
-      
-       // - verify it works
-            
+      // - verify it works
 
-       
-        </script>
+      // - display another pieces of data
+
+      // - verify it works
+    </script>
   </body>
 </html>
