@@ -34,10 +34,18 @@
             console.log(body);
             // - display one piece of data
             let todo = body;
-            console.log(divDisplay);
+            // divDisplay.innerText = todo.title
+            let para = document.createElement("p");
+            para.innerText = todo.title
+            divDisplay.appendChild(para);
+            let checkBox = document.createElement("input")
+            checkBox.type = "checkbox"
+            checkBox.checked = todo.completed
+            divDisplay.appendChild(checkBox)
+            
+
           });
       }
-
       // - display one piece of data
 
       // - verify it works
