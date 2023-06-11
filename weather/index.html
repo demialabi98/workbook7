@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+    <title>Weather</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <select name="select-cities" id="select-cities" ;"></select>
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Temperature</th>
+            <th>Temperature Unit</th>
+            <th>Wind Speed</th>
+            <th>Wind Direction</th>
+            <th>Short Forecast</th>
+          </tr>
+        </thead>
+        <tbody id="cities-tbl-tbody"></tbody>
+      </table>
+    </main>
+  </body>
+  <script src="weather.js"></script>
+</html>

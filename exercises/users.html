@@ -1,18 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
     <title>Users</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
+      <nav>
         <a href="index.html"></a>
         <a href="todo.html"></a>
-        </nav>
+        <a href="users.html"></a>
+      </nav>
     </header>
+    <main>
+      <h1>User Info</h1>
+      <input type="text" id="user-id" name="user-id" placeholder="Enter User ID" />
+      <button id="display-button" onclick="displayUserInfo();">Display User Info</button>
 
-</body>
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>website</th>
+          </tr>
+        </thead>
+        <tbody id="user-tbl-tbody"></tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    function displayUserInfo() {
+      const userIdInput = document.querySelector("#user-id");
+      const userId = userIdInput.value;
+      const displayButton = document.querySelector("#display-button");
+      displayButton.addEventListener("click", displayUserInfo);
+
+      fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("API request failed with status code: " + response.status);
+          }
+        })
+        .then((user) => {
+          const tableBody = document.querySelector("#user-tbl-tbody");
+          tableBody.innerHTML = "";
+
+          const row = document.createElement("tr");
+
+          const nameCell = document.createElement("td");
+          nameCell.innerText = user.name;
+          row.appendChild(nameCell);
+
+          const userNameCell = document.createElement("td");
+          userNameCell.innerText = user.username;
+          row.appendChild(userNameCell);
+
+          const emailCell = document.createElement("td");
+          emailCell.innerText = user.email;
+          row.appendChild(emailCell);
+
+          const addressCell = document.createElement("td");
+          addressCell.innerText = user.address.city + ", " + user.address.street + ", " + user.address.suite;
+          row.appendChild(addressCell);
+
+          const phoneCell = document.createElement("td");
+          phoneCell.innerText = user.phone;
+          row.appendChild(phoneCell);
+
+          const websiteCell = document.createElement("td");
+          websiteCell.innerText = user.website;
+          row.appendChild(websiteCell);
+
+          tableBody.appendChild(row);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  </script>
 </html>
